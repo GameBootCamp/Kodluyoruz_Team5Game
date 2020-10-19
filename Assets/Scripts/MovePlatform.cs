@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Game;
 using UnityEngine;
 
 public enum Direction
@@ -24,6 +22,17 @@ public class MovePlatform : MonoBehaviour
     private void Start()
     {
         defaultPosition = transform.position;
+        SetDirectionVector();
+    }
+
+    public void Update()
+    {
+        if (direction == Direction.NONE)
+            return;
+#if DEBUG
+        SetDirectionVector();
+#endif
+        Move();
     }
 
     private void SetDirectionVector()
@@ -32,22 +41,13 @@ public class MovePlatform : MonoBehaviour
             directionVector = Vector3.zero;
 
         else if (direction == Direction.HORIZONTAL)
-            directionVector = new Vector3(1, 0, 0);
+            directionVector = Constants.X_AXIS;
 
         else if (direction == Direction.VERTICAL)
-            directionVector = new Vector3(0, 1, 0);
+            directionVector = Constants.Y_AXIS;
 
         else if (direction == Direction.Z_AXIS)
-            directionVector = new Vector3(0, 0, 1);
-    }
-
-    public void Update()
-    {
-        if (direction == Direction.NONE)
-            return;
-
-        SetDirectionVector();
-        Move();
+            directionVector = Constants.Z_AXIS;
     }
 
     private void Move()

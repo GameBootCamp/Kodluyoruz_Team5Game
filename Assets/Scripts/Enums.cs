@@ -31,4 +31,11 @@
         Z_AXIS
     }
 
+    public enum PlayerState
+    {
+        MOVING,
+        FALLING,
+        STANDING
+    }
+
 }

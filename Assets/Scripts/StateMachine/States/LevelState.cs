@@ -11,7 +11,6 @@ namespace Game.StateMachine.States
 
         private InputManager inputManager;
 
-
         private void OnEnable()
         {
             GameManager.Instance.SetState(this);
@@ -40,6 +39,10 @@ namespace Game.StateMachine.States
             player.IsMoving(false);
         }
 
-
+        internal void GameOver(bool isWin)
+        {
+            // todo
+            Debug.Log("Game over: does player won?" + isWin);
+        }
     }
 }

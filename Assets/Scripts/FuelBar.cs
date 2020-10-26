@@ -16,30 +16,29 @@ public class FuelBar : MonoBehaviour
     {
         _currentFuel = _fuel;
     }
-
-    void Start()
-    {
-        
-    }
-
     
     void Update()
     {
         _fuelSilder.value = _currentFuel / _fuel;
 
-        if (Input.GetKey(KeyCode.Space))
+        /* if (Input.GetKey(KeyCode.Space))
         {
-            _currentFuel -= fuelBurnRate * Time.deltaTime;
+            BurnFuel();
         }
 
         if (!Input.GetKey(KeyCode.Space))
         {
             RefillFuel();
-        }
+        } */
         
     }
 
-    private void RefillFuel()
+    internal void BurnFuel()
+    {
+        _currentFuel -= fuelBurnRate * Time.deltaTime;
+    }
+
+    internal void RefillFuel()
     {
         if (_currentFuel < _fuel)
         {

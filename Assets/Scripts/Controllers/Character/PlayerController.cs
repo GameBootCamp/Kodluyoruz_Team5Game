@@ -23,6 +23,8 @@ namespace Game.Controllers.Character
         {
             rb = GetComponent<Rigidbody>();
             levelState = FindObjectOfType<LevelState>();
+            fuelBar.OnFuelFinished += OnFuelFinished;
+
             totalForce = Vector3.zero;
             playerState = PlayerState.STANDING;
         }
@@ -32,7 +34,7 @@ namespace Game.Controllers.Character
             // bu kuşulun en üstte olmassı gerekli
             if (transform.position.y <= -1)
             {
-                playerState = PlayerState.FALLING;
+                playerState = PlayerState.DEAD;
                 levelState.GameOver(false);
             }
 
@@ -96,10 +98,10 @@ namespace Game.Controllers.Character
             // Debug.Log("Stop");
             totalForce = Vector3.zero;
             particleEffect.Stop();
-            playerState = PlayerState.STOP_MOVING_FORCE;
+            playerState = PlayerState.FALLING;
 
             // adding downward froce to speed up falling
-            Vector3 force = -transform.up * upForce;
+            Vector3 force = -transform.up * upForce / 2;
             rb.AddForce(force, ForceMode.Impulse);
         }
 
@@ -118,6 +120,10 @@ namespace Game.Controllers.Character
             return false;
         }
 
+        private void OnFuelFinished()
+        {
+            playerState = PlayerState.FALLING;
+        }
     }
 }
 

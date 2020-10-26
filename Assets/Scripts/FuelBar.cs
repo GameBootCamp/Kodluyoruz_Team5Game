@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class FuelBar : MonoBehaviour
 {
+    public delegate void FuelFinishedEvent();
+
+    public FuelFinishedEvent OnFuelFinished;
+
     [SerializeField] private float _fuel = 100f;
     private float _currentFuel;
 
@@ -36,6 +40,11 @@ public class FuelBar : MonoBehaviour
     internal void BurnFuel()
     {
         _currentFuel -= fuelBurnRate * Time.deltaTime;
+        if (_currentFuel <= 0)
+        {
+            OnFuelFinished.Invoke();
+            _currentFuel = 0;
+        }
     }
 
     internal void RefillFuel()

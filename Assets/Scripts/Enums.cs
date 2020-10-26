@@ -34,9 +34,9 @@
     public enum PlayerState
     {
         MOVING,
-        STOP_MOVING_FORCE,
         FALLING,
-        STANDING
+        STANDING,
+        DEAD
     }
 
 }

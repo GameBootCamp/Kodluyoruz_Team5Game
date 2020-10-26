@@ -382,7 +382,7 @@ MonoBehaviour:
   forwardForce: 0.1
   upForce: 0.3
   maxForceLimit: {x: 0, y: 15, z: 3.5}
-  maxYPosLimit: 8
+  maxYPosLimit: 6
   particleEffect: {fileID: 1375247605}
   fuelBar: {fileID: 425554190}
 --- !u!54 &577872277

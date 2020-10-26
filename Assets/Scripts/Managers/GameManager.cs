@@ -1,5 +1,4 @@
-﻿using Game.Managers;
-using Game.StateMachine;
+﻿using Game.StateMachine;
 using UnityEngine.SceneManagement;
 
 namespace Game.Managers
@@ -8,7 +7,7 @@ namespace Game.Managers
     {
         private IState currentState;
         private InputManager inputManager;
-        private SceneType currentScene;
+        private Scenes currentScene;
 
         private void Start()
         {
@@ -34,7 +33,7 @@ namespace Game.Managers
         #endregion
 
 
-        internal void LoadScene(SceneType sceneToLoad)
+        internal void LoadScene(Scenes sceneToLoad)
         {
             currentScene = sceneToLoad;
             SceneManager.LoadScene((int)sceneToLoad);
@@ -42,7 +41,7 @@ namespace Game.Managers
 
         #region Getters
 
-        public SceneType GetCurrentScene()
+        public Scenes GetCurrentScene()
         {
             return currentScene;
         }

@@ -8,9 +8,11 @@ namespace Game.Managers
     {
         public delegate void TapEvent();
         public delegate void HoldEvent();
+        public delegate void ReleaseEvent();
 
         public TapEvent OnTap;
         public HoldEvent OnHold;
+        public ReleaseEvent OnRelease;
 
         private Touch touch;
         private Vector2 touchStartPosition, touchEndPosition;
@@ -19,6 +21,16 @@ namespace Game.Managers
         {
 
 #if UNITY_EDITOR
+            HandleKeyboardInput();
+#endif
+
+#if UNITY_ANDROID || UNITY_REMOTE
+            HandleTouchInput();
+#endif
+        }
+
+        private void HandleKeyboardInput()
+        {
             if (Input.GetKey(KeyCode.Return)) // press enter key
             {
                 Tap();
@@ -28,10 +40,15 @@ namespace Game.Managers
             {
                 Hold();
             }
-#endif
 
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                Release();
+            }
+        }
 
-#if UNITY_ANDROID
+        private void HandleTouchInput()
+        {
             if (Input.touchCount > 0)
             {
                 touch = Input.GetTouch(0);
@@ -41,7 +58,7 @@ namespace Game.Managers
                     touchStartPosition = touch.position;
                 }
 
-                else if(touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+                else if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
                 {
                     Hold();
                 }
@@ -57,21 +74,12 @@ namespace Game.Managers
                     {
                         Tap();
                     }
+
+                    else
+                    {
+                        Release();
+                    }
                 }
-            }
-#endif
-
-        }
-
-        private void Hold()
-        {
-            if (OnHold == null)
-                return;
-
-            Delegate[] calls = OnHold.GetInvocationList();
-            foreach (Delegate call in calls)
-            {
-                ((HoldEvent)call).Invoke();
             }
         }
 
@@ -86,6 +94,31 @@ namespace Game.Managers
                 ((TapEvent)call).Invoke();
             }
         }
+
+        private void Hold()
+        {
+            if (OnHold == null)
+                return;
+
+            Delegate[] calls = OnHold.GetInvocationList();
+            foreach (Delegate call in calls)
+            {
+                ((HoldEvent)call).Invoke();
+            }
+        }
+
+        private void Release()
+        {
+            if (OnRelease == null)
+                return;
+
+            Delegate[] calls = OnRelease.GetInvocationList();
+            foreach (Delegate call in calls)
+            {
+                ((ReleaseEvent)call).Invoke();
+            }
+        }
+
     }
 }
 

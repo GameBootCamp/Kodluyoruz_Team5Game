@@ -1,11 +1,13 @@
-﻿using Game.Managers;
+﻿using System;
+using Game.Controllers.Character;
+using Game.Managers;
 using UnityEngine;
 
 namespace Game.StateMachine.States
 {
-    public class PlayState : MonoBehaviour, IState
+    public class LevelState : MonoBehaviour, IState
     {
-        public CharacterMovement character;
+        public PlayerController player;
 
         private InputManager inputManager;
 
@@ -13,23 +15,31 @@ namespace Game.StateMachine.States
         private void OnEnable()
         {
             GameManager.Instance.SetState(this);
-            inputManager = InputManager.Instance;
         }
 
         public void Enter()
         {
+            inputManager = InputManager.Instance;
             inputManager.OnHold += OnHold;
+            inputManager.OnRelease += OnRelease;
         }
 
         public void Exit()
         {
             inputManager.OnHold -= OnHold;
+            inputManager.OnRelease -= OnRelease;
         }
 
         private void OnHold()
         {
-            character.Fly();
+            player.IsMoving(true);
         }
+
+        private void OnRelease()
+        {
+            player.IsMoving(false);
+        }
+
 
     }
 }

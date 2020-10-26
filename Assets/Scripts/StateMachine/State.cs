@@ -1,5 +1,4 @@
 ﻿using System;
-using Game.Enums;
 using UnityEngine;
 
 namespace Game.StateMachine

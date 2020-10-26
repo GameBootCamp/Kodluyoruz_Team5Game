@@ -1,11 +1,17 @@
-﻿using System;
-namespace Game
+﻿namespace Game
 {
-    public enum SceneType
+    public enum Scenes
     {
         START_SCENE,
         LEVEL_SCENE,
         GAMEOVER_SCENE
+    }
+
+    public enum StateType
+    {
+        START,
+        LEVEL,
+        GAMEOVER
     }
 
     public enum PlatformSizeChangeType

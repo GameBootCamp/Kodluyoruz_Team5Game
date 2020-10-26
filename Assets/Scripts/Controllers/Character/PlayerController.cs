@@ -96,6 +96,11 @@ namespace Game.Controllers.Character
             // Debug.Log("Stop");
             totalForce = Vector3.zero;
             particleEffect.Stop();
+            playerState = PlayerState.STOP_MOVING_FORCE;
+
+            // adding downward froce to speed up falling
+            Vector3 force = -transform.up * upForce;
+            rb.AddForce(force, ForceMode.Impulse);
         }
 
         private void Stand()

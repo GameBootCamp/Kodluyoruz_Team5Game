@@ -36,14 +36,14 @@ namespace Game.Managers
                 Tap();
             }
 
-            if (Input.GetKey(KeyCode.Space))
-            {
-                Hold();
-            }
-
-            if (Input.GetKeyUp(KeyCode.Space))
+            else if (Input.GetKeyUp(KeyCode.Space))
             {
                 Release();
+            }
+
+            else if (Input.GetKey(KeyCode.Space))
+            {
+                Hold();
             }
         }
 

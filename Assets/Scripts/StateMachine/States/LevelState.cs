@@ -1,6 +1,7 @@
 ﻿using System;
 using Game.Controllers.Character;
 using Game.Managers;
+using TMPro;
 using UnityEngine;
 
 namespace Game.StateMachine.States
@@ -8,17 +9,21 @@ namespace Game.StateMachine.States
     public class LevelState : MonoBehaviour, IState
     {
         public PlayerController player;
+        public TextMeshProUGUI startToTapText; 
 
         private InputManager inputManager;
+        private bool isLevelStarted;
 
         private void OnEnable()
         {
             GameManager.Instance.SetState(this);
+            isLevelStarted = false;
         }
 
         public void Enter()
         {
             inputManager = InputManager.Instance;
+            inputManager.OnTap += OnTap;
             inputManager.OnHold += OnHold;
             inputManager.OnRelease += OnRelease;
         }
@@ -29,14 +34,28 @@ namespace Game.StateMachine.States
             inputManager.OnRelease -= OnRelease;
         }
 
+
+        private void OnTap()
+        {
+            if(!isLevelStarted)
+            {
+                inputManager.OnTap -= OnTap;
+                isLevelStarted = true;
+                startToTapText.gameObject.SetActive(false);
+            }
+        }
+
+
         private void OnHold()
         {
-            player.IsMoving(true);
+            if(isLevelStarted)
+                player.IsMoving(true);
         }
 
         private void OnRelease()
         {
-            player.IsMoving(false);
+            if(isLevelStarted)
+                player.IsMoving(false);
         }
 
         internal void GameOver(bool isWin)

@@ -9,7 +9,7 @@ namespace Game.StateMachine.States
     public class LevelState : MonoBehaviour, IState
     {
         public PlayerController player;
-        public TextMeshProUGUI startToTapText; 
+        public  GameObject tapAnimation; 
 
         private InputManager inputManager;
         private bool isLevelStarted;
@@ -41,7 +41,7 @@ namespace Game.StateMachine.States
             {
                 inputManager.OnTap -= OnTap;
                 isLevelStarted = true;
-                startToTapText.gameObject.SetActive(false);
+                tapAnimation.SetActive(false);
             }
         }
 

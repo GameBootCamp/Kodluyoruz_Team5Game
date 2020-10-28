@@ -1,4 +1,6 @@
-﻿using Game.StateMachine;
+﻿using System;
+using Game.StateMachine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Game.Managers
@@ -7,13 +9,15 @@ namespace Game.Managers
     {
         private IState currentState;
         private InputManager inputManager;
-        private Scenes currentScene;
+        private int currentLevelIndex = 0;
+        private int highScore = 0;
 
         private void Start()
         {
             inputManager = InputManager.Instance;
-        }
+            ReadHighScore();
 
+        }
 
         #region STATE MACHINE
         public void SetState(IState nextState)
@@ -32,20 +36,48 @@ namespace Game.Managers
 
         #endregion
 
+        #region LEVEL LOADING FUNCTIONS
 
-        internal void LoadScene(Scenes sceneToLoad)
+        internal int GetCurrentScene()
         {
-            currentScene = sceneToLoad;
-            SceneManager.LoadScene((int)sceneToLoad);
+            return currentLevelIndex;
         }
 
-        #region Getters
-
-        public Scenes GetCurrentScene()
+        internal void LoadNextLevel()
         {
-            return currentScene;
+            currentLevelIndex++;
+            if (currentLevelIndex <= SceneManager.sceneCountInBuildSettings)
+                SceneManager.LoadScene(currentLevelIndex);
         }
 
+        internal void RestartLevel()
+        {
+            SceneManager.LoadScene(currentLevelIndex);
+        }
+
+        #endregion
+
+        #region READ-WRITE HIGHSCORE
+
+        internal void SaveNewHighScore(int playerScore)
+        {
+            highScore = playerScore;
+            PlayerPrefs.SetInt("highScore", highScore);
+            PlayerPrefs.Save();
+        }
+
+        private void ReadHighScore()
+        {
+            if (PlayerPrefs.HasKey("highScore"))
+                highScore = PlayerPrefs.GetInt("highScore");
+            else
+                highScore = 0;
+        }
+
+        internal int GetHighScore()
+        {
+            return highScore;
+        }
         #endregion
 
     }

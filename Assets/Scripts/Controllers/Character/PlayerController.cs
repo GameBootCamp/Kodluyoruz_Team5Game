@@ -86,6 +86,11 @@ namespace Game.Controllers.Character
             }
         }
 
+        internal int GetScore()
+        {
+            return _counter;
+        }
+
         private void Move()
         {
             if (transform.position.y > maxYPosLimit)

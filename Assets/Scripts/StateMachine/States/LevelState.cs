@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Controllers;
 using Game.Controllers.Character;
 using Game.Managers;
 using TMPro;
@@ -9,15 +10,19 @@ namespace Game.StateMachine.States
     public class LevelState : MonoBehaviour, IState
     {
         public PlayerController player;
-        public  GameObject tapAnimation; 
+        public  GameObject tapAnimation;
 
+        private GameManager gameManager;
         private InputManager inputManager;
+        private UIController uiController;
         private bool isLevelStarted;
 
         private void OnEnable()
         {
-            GameManager.Instance.SetState(this);
+            gameManager = GameManager.Instance;
+            gameManager.SetState(this);
             isLevelStarted = false;
+            uiController = FindObjectOfType<UIController>();
         }
 
         public void Enter()
@@ -60,8 +65,13 @@ namespace Game.StateMachine.States
 
         internal void GameOver(bool isWin)
         {
-            // todo
-            Debug.Log("Game over: does player won?" + isWin);
+            Debug.Log("Game over: win?" + isWin);
+            int playerScore = player.GetScore();
+            int highScore = gameManager.GetHighScore();
+            if (playerScore > highScore)
+                gameManager.SaveNewHighScore(playerScore);
+
+            uiController.ShowGameOverPanel(isWin, playerScore, highScore);
         }
     }
 }

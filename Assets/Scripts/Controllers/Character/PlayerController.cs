@@ -1,6 +1,7 @@
 ﻿using System;
 using Game.StateMachine.States;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game.Controllers.Character
 {
@@ -12,11 +13,14 @@ namespace Game.Controllers.Character
         public float maxYPosLimit;
         public ParticleSystem particleEffect;
         public FuelBar fuelBar;
+        public Text scoreText;
+        
 
         private Rigidbody rb;
         private Vector3 totalForce;
         private PlayerState playerState;
         private LevelState levelState;
+        private int _counter;
 
         #region Monobehaviour Functions
         private void Start()
@@ -61,6 +65,12 @@ namespace Game.Controllers.Character
             {
                 Stand();
                 levelState.GameOver(true);
+            }
+
+            else if (collision.gameObject.CompareTag("checkpoint"))
+            {
+                playerState = PlayerState.DEAD;
+                levelState.GameOver(false);
             }
         }
         #endregion
@@ -123,6 +133,18 @@ namespace Game.Controllers.Character
         private void OnFuelFinished()
         {
             playerState = PlayerState.FALLING;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.tag == "coin")
+            {
+                other.gameObject.SetActive(false);
+
+                _counter++;
+
+                scoreText.text = "Score: " + _counter;
+            }
         }
     }
 }

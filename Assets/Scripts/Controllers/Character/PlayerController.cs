@@ -66,6 +66,12 @@ namespace Game.Controllers.Character
                 Stand();
                 levelState.GameOver(true);
             }
+
+            else if (collision.gameObject.CompareTag("checkpoint"))
+            {
+                playerState = PlayerState.DEAD;
+                levelState.GameOver(false);
+            }
         }
         #endregion
 

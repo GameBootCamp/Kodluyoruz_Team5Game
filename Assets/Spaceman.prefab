@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 1175490712}
   - component: {fileID: 3355843863992458799}
   - component: {fileID: 3355843863992458798}
-  - component: {fileID: 3073090365072237834}
   - component: {fileID: 1175490708}
   m_Layer: 0
   m_Name: Spaceman
@@ -163,19 +162,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47d759bf1ffcd954dab2166ec58d7a88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &3073090365072237834
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1435908948454179220}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.9259316, y: 1.9400991, z: 0.95949507}
-  m_Center: {x: 0.0041481853, y: -0.098275244, z: -0.05048746}
 --- !u!114 &1175490708
 MonoBehaviour:
   m_ObjectHideFlags: 0

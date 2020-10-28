@@ -11,12 +11,16 @@ GameObject:
   - component: {fileID: 1433412826261072986}
   - component: {fileID: 1410536445752036652}
   - component: {fileID: 1421364568057494796}
-  - component: {fileID: 1301451937453147338}
   - component: {fileID: 1435908948454179222}
   - component: {fileID: 1435908948454179221}
+  - component: {fileID: 1175490712}
+  - component: {fileID: 3355843863992458799}
+  - component: {fileID: 3355843863992458798}
+  - component: {fileID: 3073090365072237834}
+  - component: {fileID: 1175490708}
   m_Layer: 0
   m_Name: Spaceman
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86,20 +90,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &1301451937453147338
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1435908948454179220}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.47974753
-  m_Height: 2.1612668
-  m_Direction: 1
-  m_Center: {x: -0.00414823, y: 0.04115671, z: 0.050487503}
 --- !u!114 &1435908948454179222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forwardForce: 0.1
-  upForce: 0.3
+  upForce: 0.5
   maxForceLimit: {x: 0, y: 50, z: 3.5}
   maxYPosLimit: 50
   particleEffect: {fileID: 3183259614004673958}
@@ -128,12 +118,77 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.5
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!65 &1175490712
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435908948454179220}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9259316, y: 1.9400991, z: 0.95949507}
+  m_Center: {x: 0.0041481853, y: -0.098275244, z: -0.05048746}
+--- !u!136 &3355843863992458799
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435908948454179220}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.47974753
+  m_Height: 2.1612668
+  m_Direction: 1
+  m_Center: {x: 0.0041482, y: -0.57, z: -0.050487444}
+--- !u!114 &3355843863992458798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435908948454179220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47d759bf1ffcd954dab2166ec58d7a88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &3073090365072237834
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435908948454179220}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9259316, y: 1.9400991, z: 0.95949507}
+  m_Center: {x: 0.0041481853, y: -0.098275244, z: -0.05048746}
+--- !u!114 &1175490708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435908948454179220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d4823b5151245744990463fe7cc69ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scoreText: {fileID: 0}
 --- !u!1 &1436561851415298850
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,15 +499,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7362969261217200631, guid: a86d3857b74273d44ab8272defc01b7e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.493473
+      value: -0.13
       objectReference: {fileID: 0}
     - target: {fileID: 7362969261217200631, guid: a86d3857b74273d44ab8272defc01b7e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.33
+      value: -0.57
       objectReference: {fileID: 0}
     - target: {fileID: 7362969261217200631, guid: a86d3857b74273d44ab8272defc01b7e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.7445145
+      value: -0.47
       objectReference: {fileID: 0}
     - target: {fileID: 7362969261217200631, guid: a86d3857b74273d44ab8272defc01b7e, type: 3}
       propertyPath: m_LocalRotation.x

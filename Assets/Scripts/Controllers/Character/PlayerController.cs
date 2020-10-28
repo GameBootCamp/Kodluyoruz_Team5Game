@@ -32,7 +32,7 @@ namespace Game.Controllers.Character
         private void FixedUpdate()
         {
             // bu kuşulun en üstte olmassı gerekli
-            if (transform.position.y <= -1)
+            if (transform.position.y <= -3)
             {
                 playerState = PlayerState.DEAD;
                 levelState.GameOver(false);

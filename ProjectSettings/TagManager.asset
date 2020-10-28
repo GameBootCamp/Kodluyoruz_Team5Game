@@ -6,6 +6,7 @@ TagManager:
   tags:
   - platform
   - finishLine
+  - coin
   layers:
   - Default
   - TransparentFX

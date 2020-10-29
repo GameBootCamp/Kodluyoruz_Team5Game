@@ -13,6 +13,7 @@ namespace Game.Controllers
         private Button exitButton;
         private Text highScoreText;
         private Text gameOverText;
+        private GameObject winImages;
 
         private  void Start()
         {
@@ -27,6 +28,8 @@ namespace Game.Controllers
 
             highScoreText = gameOverPanel.transform.GetChild(3).GetComponent<Text>();
             gameOverText = gameOverPanel.transform.GetChild(4).GetComponent<Text>();
+
+            winImages = gameOverPanel.transform.GetChild(5).gameObject;
 
             gameOverPanel.SetActive(false);
         }
@@ -48,14 +51,19 @@ namespace Game.Controllers
 
         public void ShowGameOverPanel(bool isWin, int score, int highscore)
         {
-            highScoreText.text = "SCORE: " + score.ToString() + "\nHIGH SCORE: " + highscore.ToString();
+            highScoreText.text = "SCORE: " + score.ToString() + "\n\nHIGH SCORE: " + highscore.ToString();
             if(!isWin)
             {
-                nextLevelButton.gameObject.SetActive(false);
-                gameOverText.text = "GAME OVER\nfail!";
+                gameOverText.text = "GAME OVER\n\nFAIL!";
             }
             else
-                gameOverText.text = "GAME OVER\nwin!";
+            {
+                gameOverText.text = "GAME OVER\n\nWIN!";
+            }
+
+            nextLevelButton.gameObject.SetActive(isWin);
+            winImages.SetActive(isWin);
+            restartButton.gameObject.SetActive(!isWin);
 
             gameOverPanel.gameObject.SetActive(true);
         }

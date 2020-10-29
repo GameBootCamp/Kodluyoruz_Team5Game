@@ -14,7 +14,6 @@ namespace Game.Controllers.Character
         public ParticleSystem particleEffect;
         public FuelBar fuelBar;
         public Text scoreText;
-        
 
         private Rigidbody rb;
         private Vector3 totalForce;
@@ -70,7 +69,16 @@ namespace Game.Controllers.Character
             else if (collision.gameObject.CompareTag("checkpoint"))
             {
                 playerState = PlayerState.DEAD;
+                StopMove();
                 levelState.GameOver(false);
+            }
+        }
+
+        private void OnCollisionExit(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("platform"))
+            {
+                playerState = PlayerState.MOVING;
             }
         }
         #endregion
@@ -137,7 +145,7 @@ namespace Game.Controllers.Character
 
         private void OnFuelFinished()
         {
-            playerState = PlayerState.FALLING;
+            StopMove();
         }
 
         private void OnTriggerEnter(Collider other)

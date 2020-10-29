@@ -41,10 +41,10 @@ namespace Game.Controllers.Character
                 levelState.GameOver(false);
             }
 
-            else if (playerState == PlayerState.MOVING)
+            else if (playerState == PlayerState.MOVING && fuelBar.HasFuel())
             {
-                Move();
                 fuelBar.BurnFuel();
+                Move();
             }
 
             else if(playerState == PlayerState.STANDING)
@@ -62,7 +62,6 @@ namespace Game.Controllers.Character
 
             else if (collision.gameObject.CompareTag("finishLine"))
             {
-                Stand();
                 levelState.GameOver(true);
             }
 

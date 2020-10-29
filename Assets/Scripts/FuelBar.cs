@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -53,5 +54,12 @@ public class FuelBar : MonoBehaviour
         {
             _currentFuel += fuelRefillRate * Time.deltaTime;
         }
+    }
+
+    internal bool HasFuel()
+    {
+        if (_currentFuel > 0)
+            return true;
+        return false;
     }
 }

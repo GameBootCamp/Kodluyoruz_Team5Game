@@ -72,6 +72,7 @@ namespace Game.StateMachine.States
                 gameManager.SaveNewHighScore(playerScore);
 
             uiController.ShowGameOverPanel(isWin, playerScore, highScore);
+            player.gameObject.SetActive(false);
         }
     }
 }
